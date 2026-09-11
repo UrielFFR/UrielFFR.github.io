@@ -10,6 +10,8 @@ export const sharedPageComponents: SharedLayout = {
     links: {
       GitHub: "https://github.com/UrielFFR",
       "Discord Community": "https://discord.gg/dQmC4Fj3yY",
+      "Speedrun.com": "https://www.speedrun.com/Final_Fantasy_Resonance",
+      "Official Site": "https://www.square-enix.com/finalfantasyresonance",
     },
   }),
 }

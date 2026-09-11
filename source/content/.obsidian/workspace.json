@@ -35,8 +35,7 @@
               "title": "index"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -204,10 +203,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "be841957853e4cfd",
+  "active": "ecb10d2293d5b13a",
   "lastOpenFiles": [
-    "Final Fantasy Resonance Demo.md",
     "index.md",
+    "Final Fantasy Resonance Demo.md",
     "Consumables/Tablet Fragments.md",
     "Locations/Grandshelt the Royal Capital.md",
     "Wishlist Loadouts.md",

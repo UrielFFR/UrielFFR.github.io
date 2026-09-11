@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Enemies/Marauder.md",
+                "file": "Consumables/Magicite Shard.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Marauder"
+              "title": "Magicite Shard"
             }
           }
         ],
@@ -204,10 +204,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "be841957853e4cfd",
+  "active": "e3ff47011b4f4de6",
   "lastOpenFiles": [
-    "Enemies/Antlion.md",
+    "Final Fantasy Resonance Demo.md",
+    "index.md",
+    "Wishlist Loadouts.md",
     "Enemies/Marauder.md",
+    "Enemies/Antlion.md",
     "Enemies/Dhorme Chimera.md",
     "Enemies/Floateye.md",
     "Enemies/Minituar.md",
@@ -216,11 +219,8 @@
     "Enemies/Wild Rat.md",
     "Enemies/Abtu.md",
     "Characters/Rain.md",
-    "index.md",
-    "Final Fantasy Resonance Demo.md",
     "Consumables/Tablet Fragments.md",
     "Locations/Grandshelt the Royal Capital.md",
-    "Wishlist Loadouts.md",
     "Untitled.base",
     "Untitled.canvas",
     "Consumables/Magicite Shard.md",

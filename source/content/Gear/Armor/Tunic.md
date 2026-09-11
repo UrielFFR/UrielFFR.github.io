@@ -1,8 +1,9 @@
 ## Stats
-- Phys. Atk. 24
-- Mag. Atk. 22
+- Phys. Def. 16
+- Mag. Def. 18
+- Speed 5
 ## Shop Info
 ### Town of Mitra
-- 300gil
+- 200gil
 ### Grandshelt the Royal Capital
-- 300gil
+- 200gil

@@ -1,8 +1,8 @@
 ## Valid Users
 - [[Fina]]
 ## Stats
-- Phys. Atk. 32
-- Mag. Atk. 46
+- Phys. Def. 32
+- Mag. Def. 46
 - MP 20
 ## Shop Info
 ### Grandport Harbor

@@ -55,16 +55,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Gear/Armor/Leather Armor.md",
+                "file": "Enemies/Abtu.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Leather Armor"
+              "title": "Abtu"
+            }
+          },
+          {
+            "id": "ec4fae009b1009d1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Citrine Pot.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Citrine Pot"
+            }
+          },
+          {
+            "id": "a571b8054840509d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Gilgamesh.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Gilgamesh"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -232,8 +260,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "e94fbe0249d852f3",
+  "active": "a571b8054840509d",
   "lastOpenFiles": [
+    "Citrine Pot.md",
+    "Enemies/Abtu.md",
+    "Gilgamesh.md",
+    "Gear/Armor/Leather Armor.md",
     "Gear/Armor/Spirit Veil.md",
     "Gear/Accessories/Idaten's Shoes.md",
     "Gear/Accessories/Mage's Glasses.md",
@@ -245,7 +277,6 @@
     "Gear/Armor/Cotton Robe.md",
     "Gear/Armor/Black Garb.md",
     "Gear/Armor/Tunic.md",
-    "Gear/Armor/Leather Armor.md",
     "Final Fantasy Resonance Demo.md",
     "Consumables/Tablet Fragments.md",
     "private/Routing/Expert.md",
@@ -262,9 +293,6 @@
     "private/Routing",
     "Enemies/Hell's Rider.md",
     "Enemies/Dark Skeleton.md",
-    "Enemies/Sergeant.md",
-    "Enemies/Soul.md",
-    "Enemies/Wraith Soldier.md",
     "Untitled.base",
     "Untitled.canvas",
     "Enemies",

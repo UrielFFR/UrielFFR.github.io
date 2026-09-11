@@ -1,0 +1,1 @@
+Gradually restores HP

@@ -1,0 +1,1 @@
+Deals Ice magic damage to a single enemy. Power increases and targets all enemies when thrown

@@ -1,0 +1,1 @@
+Deals Fire magic damage to a single enemy. Power increases and targets all enemies when thrown

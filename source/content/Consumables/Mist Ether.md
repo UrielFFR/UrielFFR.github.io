@@ -1,0 +1,1 @@
+Restores 50 MP for all allies

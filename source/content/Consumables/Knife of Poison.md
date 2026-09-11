@@ -1,0 +1,1 @@
+Deals physical damage to a single enemy and inflicts Poison. Power increases when thrown

@@ -22,17 +22,17 @@
             }
           },
           {
-            "id": "ee14d8067672b8fe",
+            "id": "e3ff47011b4f4de6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "index.md",
+                "file": "Enemies/Marauder.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "Marauder"
             }
           }
         ],
@@ -204,10 +204,20 @@
       "bases:Create new base": false
     }
   },
-  "active": "ee14d8067672b8fe",
+  "active": "be841957853e4cfd",
   "lastOpenFiles": [
-    "Final Fantasy Resonance Demo.md",
+    "Enemies/Antlion.md",
+    "Enemies/Marauder.md",
+    "Enemies/Dhorme Chimera.md",
+    "Enemies/Floateye.md",
+    "Enemies/Minituar.md",
+    "Characters/Fina.md",
+    "Characters/Lasswell.md",
+    "Enemies/Wild Rat.md",
+    "Enemies/Abtu.md",
+    "Characters/Rain.md",
     "index.md",
+    "Final Fantasy Resonance Demo.md",
     "Consumables/Tablet Fragments.md",
     "Locations/Grandshelt the Royal Capital.md",
     "Wishlist Loadouts.md",
@@ -224,16 +234,6 @@
     "Visions/Leah.md",
     "Enemies/Cutpurse.md",
     "Enemies/Shark.md",
-    "Enemies/Green Slime.md",
-    "Enemies/Abtu.md",
-    "Enemies/Desert Sahagin.md",
-    "Enemies/Araune.md",
-    "Enemies/Aqua Elemental.md",
-    "Enemies/Goblin.md",
-    "Enemies/Mage.md",
-    "Locations/Kolobos Ruins.md",
-    "Enemies/Sahagin.md",
-    "Enemies/Scorpion.md",
     "Enemies",
     "Locations",
     "Characters",

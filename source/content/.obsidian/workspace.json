@@ -50,31 +50,17 @@
             }
           },
           {
-            "id": "a268b13606a57358",
+            "id": "e94fbe0249d852f3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Gear/Armor/Tunic.md",
+                "file": "Gear/Armor/Leather Armor.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Tunic"
-            }
-          },
-          {
-            "id": "0f6d0217ddf794af",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Gear/Armor/Black Garb.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Black Garb"
+              "title": "Leather Armor"
             }
           }
         ],
@@ -246,39 +232,39 @@
       "bases:Create new base": false
     }
   },
-  "active": "be841957853e4cfd",
+  "active": "e94fbe0249d852f3",
   "lastOpenFiles": [
-    "Gear/Armor/Surcoat.md",
-    "Gear/Accessories/Stagger Ring.md",
     "Gear/Armor/Spirit Veil.md",
-    "Gear/Armor/Bronze Chestplate.md",
-    "Gear/Armor/Cotton Robe.md",
+    "Gear/Accessories/Idaten's Shoes.md",
+    "Gear/Accessories/Mage's Glasses.md",
+    "Gear/Accessories/Hairband.md",
+    "Gear/Accessories/Monk's Prayer Beads.md",
+    "Gear/Accessories/Star Pendant.md",
+    "Gear/Armor/Surcoat.md",
     "Gear/Armor/Knight's Jacket.md",
-    "Gear/Armor/Prickly Straitjacket.md",
+    "Gear/Armor/Cotton Robe.md",
     "Gear/Armor/Black Garb.md",
+    "Gear/Armor/Tunic.md",
+    "Gear/Armor/Leather Armor.md",
+    "Final Fantasy Resonance Demo.md",
+    "Consumables/Tablet Fragments.md",
+    "private/Routing/Expert.md",
+    "Gear/Accessories/Stagger Ring.md",
+    "Gear/Armor/Bronze Chestplate.md",
+    "Gear/Armor/Prickly Straitjacket.md",
     "Locations/Kolobos Ruins.md",
     "Characters/Rain.md",
     "Gear/Accessories",
     "Gear/Armor",
     "Gear/Weapons",
     "Characters/Lasswell.md",
-    "private/Routing/Expert.md",
     "private",
-    "Final Fantasy Resonance Demo.md",
     "private/Routing",
     "Enemies/Hell's Rider.md",
     "Enemies/Dark Skeleton.md",
     "Enemies/Sergeant.md",
     "Enemies/Soul.md",
     "Enemies/Wraith Soldier.md",
-    "Enemies/Enhanced Wraith Soldier.md",
-    "Consumables/Tablet Fragments.md",
-    "Consumables/Magicite Shard.md",
-    "index.md",
-    "Wishlist Loadouts.md",
-    "Enemies/Marauder.md",
-    "Enemies/Antlion.md",
-    "Enemies/Dhorme Chimera.md",
     "Untitled.base",
     "Untitled.canvas",
     "Enemies",

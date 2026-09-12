@@ -1,0 +1,1 @@
+Deals physical damage to a single enemy and inflicts Blind. Power increases when thrown

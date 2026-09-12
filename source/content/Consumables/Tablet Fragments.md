@@ -3,7 +3,7 @@ Used to open chests at the [[Oblivion Palace]]
 1. Grandshelt
 	1. Left of weapon vendor between two covered stalls, behind left stall by some wooden crates
 2. Kol
-	1. Sout of map in the water, on the left side
+	1. South of map in the water, on the left side
 3. Felicitas
 	1. Left side of map, hidden tunnel left of Rolan's home up ladder
 	2. Right side of item shop

@@ -2,11 +2,11 @@
 1. Behind Pillar Path
 	- 2x [[Knife of Poison]]
 2. Path behind stairs after first Warp
-	1. [[Prickly Straitjacket]]
+	- [[Prickly Straitjacket]]
 3. Stairway after falling path
-	1. ??
+	- 3x [[Antidote Herb]]
 4. Next to teleporter hallway
-	1. ??
+	- 2x [[Ether]]
 ## Encounter Information
 - [[Poplium]]
 	- Weaknesses

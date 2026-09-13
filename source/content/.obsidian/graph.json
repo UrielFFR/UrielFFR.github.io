@@ -8,10 +8,10 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
-      "query": "path:Gear  ",
+      "query": "path:Gear/Armor  ",
       "color": {
         "a": 1,
-        "rgb": 6070742
+        "rgb": 8964087
       }
     },
     {
@@ -34,6 +34,20 @@
         "a": 1,
         "rgb": 6084188
       }
+    },
+    {
+      "query": "path:Gear/Weapons  ",
+      "color": {
+        "a": 1,
+        "rgb": 6084269
+      }
+    },
+    {
+      "query": "path:Gear/Accessories  ",
+      "color": {
+        "a": 1,
+        "rgb": 6073814
+      }
     }
   ],
   "collapse-display": true,
@@ -46,6 +60,6 @@
   "repelStrength": 12.3283218203982,
   "linkStrength": 0.39685212772848,
   "linkDistance": 30,
-  "scale": 1.9655560456566579,
+  "scale": 0.7132754626224329,
   "close": true
 }

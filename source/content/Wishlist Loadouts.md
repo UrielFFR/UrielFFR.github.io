@@ -47,7 +47,6 @@ Total MRP minimum: 450
 - [[Warrior of Light]]: MR1
 	- Restore HP on Stagger
 - [[Terra]]: MR0
-- [[Cloud]]: MR2 (or MR1 if Tronn is MR2)
-	- Restore MP on Crit
+- [[Cloud]]: MR0
 - [[Tronn]]: MR1 (or MR1 if Cloud is MR2)
 	- Restore MP on Stagger

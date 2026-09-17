@@ -39,10 +39,14 @@
             "id": "ae8407157e7dc48d",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Routing/Expert.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Expert"
             }
           }
         ],
@@ -216,6 +220,8 @@
   },
   "active": "be841957853e4cfd",
   "lastOpenFiles": [
+    "Wishlist Loadouts.md",
+    "Routing/Expert.md",
     "mag.md",
     "Enemies/Steel Bat.md",
     "Enemies/Gigantoad.md",
@@ -227,7 +233,6 @@
     "Consumables/Knives/Knife of Blind.md",
     "Enemies/Ivy.md",
     "Enemies/Citrine Pot.md",
-    "Routing/Expert.md",
     "Locations/Grandshelt the Royal Capital.md",
     "Characters/Rain.md",
     "Characters/Lasswell.md",
@@ -237,7 +242,6 @@
     "Enemies/Goblin.md",
     "Enemies/The Hunger.md",
     "Visions/Leah.md",
-    "Wishlist Loadouts.md",
     "Visions/Tronn.md",
     "Visions/Warrior of Light.md",
     "Gear/Weapons/Claymore.md",

@@ -82,6 +82,7 @@ Loot:
 ## Felicitas
 Loot:
 - 2x [[Ice Scroll I]] (Grab) (Behind shop)
+- 2x [[Smoke Bomb]] (Grab) (Behind Hotel)
 ## Overworld
 Loot:
 - 2x [[Knife of Poison]] (Grab) (By water following ridge)

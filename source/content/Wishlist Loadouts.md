@@ -5,15 +5,15 @@ Total MRP minimum: 510
 - [[Surcoat]]: (Phys+42,Mag+36;HP+80)
 - [[Monk's Prayer Beads]]?
 - [[Star Pendant]]: (Poison Immune)
-### Visions (70/108)
-- [[Warrior of Light]]: MR5
+### Visions (80/108)
+- [[Warrior of Light]]: MR5 (Might not be strictly nec)
 - [[Terra]]: MR0
-- [[Cloud]]: MR1
+- [[Cloud]]: MR1 (2 if WoL3)
 	- Restore MP on Crit
 - [[Tronn]]: MR3
 	- Restore MP on Stagger
 	- Fill LB on Stagger
-- [[Leah]]: MR1 (Maybe MR2 for +Spirit)
+- [[Leah]]: MR2
 	- First Aid
 ## [[Lasswell]]
 Total MRP minimum: 605
@@ -23,18 +23,16 @@ Total MRP minimum: 605
 - [[Earrings of Health]]: (HP+70)
 	- Could be a [[Monk's Prayer Beads]]
 - [[Star Pendant]]: (Poison Immune)
-### Visions (105/108)
-- [[Tronn]]: MR5
+### Visions (75/108)
+- [[Tronn]]: MR3
 - [[Warrior of Light]]: MR2 (Maybe MR1 if no stamina ok)
 	- Restore HP on Stagger
 - [[Terra]]: MR3
 	- Tenebrous Rites
 	- Magic Boost
-- [[Cloud]]: MR1
+- [[Cloud]]: MR2
 	- Restore MP on Crit
-- [[Leah]]: MR3 (Maybe MR0 if no spirit ok)
-	- First Aid
-	- Healing Magic +10%
+- [[Leah]]: MR2 (Maybe MR0 if no spirit ok)
 ## [[Fina]]
 Total MRP minimum: 450
 ### Equipment
@@ -42,11 +40,11 @@ Total MRP minimum: 450
 - [[Spirit Veil]]: (Phys+32,Mag+46,S+13)
 - [[Bulletproof Vest]]: (Phys+10)
 - [[Star Pendant]]: (Poison Immune)
-### Visions (60/108)
-- [[Leah]]: MR5
-- [[Warrior of Light]]: MR1
+### Visions (40/108)
+- [[Leah]]: MR5 3?
+- [[Warrior of Light]]: MR2
 	- Restore HP on Stagger
 - [[Terra]]: MR0
 - [[Cloud]]: MR0
-- [[Tronn]]: MR1 (or MR1 if Cloud is MR2)
+- [[Tronn]]: MR2
 	- Restore MP on Stagger

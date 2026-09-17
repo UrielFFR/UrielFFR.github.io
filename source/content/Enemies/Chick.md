@@ -1,9 +1,9 @@
 Avian
 ## Weaknesses
-1. Wind
+1. Ice
 ## Resistances
-- Earth
-## Traits
 None
+## Traits
+- Easily staggered
 ## Drops
-- [[Phoenix Down]]
+- [[Potion]]

@@ -23,7 +23,9 @@
 	- 300gil
 2. House from Behind Passage
 	- 300gil
-3. Open area
+3. House old man
+	1. [[Ether]]
+4. Open area
 	- [[Healing Spring]]
-4. Right of vendors by crates
+5. Right of vendors by crates
 	- [[Tablet Fragments]]

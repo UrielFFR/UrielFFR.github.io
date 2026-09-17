@@ -23,7 +23,7 @@
 - [[Phoenix Down]] (Grab?)
 - [[Ether]] (Grab)
 - 2x [[Phoenix Down]] (Skip)
-
+### Vision Stuff
 ==Rain: Tronn, Lasswell: Leah==
 ## Overworld
 ### Loot:
@@ -49,7 +49,7 @@
 - [[Black Garb]] (Skip)
 - 2x 300gil (Skip) (Big house and behind)
 - [[Healing Spring]] (Skip)
-
+### Vision Stuff
 ==Rain: None, Lasswell: Tronn, Fina: Leah==
 ## Overworld
 ### Loot:
@@ -74,7 +74,7 @@
 ## Overworld
 ### Loot:
 - 2x [[Water Scroll I]] (Skip) (Desert near SoL for Cloud)
-
+### Vision Stuff
 (Estimate this is when we hit MR2)
 
 ==Rain: WoL, Lasswell: Tronn, Fina: Leah==
@@ -90,7 +90,7 @@
 ## Overworld
 ### Loot:
 - 2x [[Knife of Poison]] (Grab) (By water following ridge)
-
+### Vision Stuff
 (Estimate this is when we hit MR2)
 
 ==Rain: WoL, Lasswell: Cloud, Fina: Leah==
@@ -98,7 +98,7 @@
 ## Overworld
 ### Loot:
 - [[Ether]] (Grab)
-
+### Vision Stuff
 (Estimate this is when we hit MR2)
 
 ==Rain: WoL, Lasswell: Tronn, Fina: Leah==
@@ -124,7 +124,7 @@
 - 2x [[Ether]] (Grab)
 - [[Magicite Shard]] (Skip)
 - [[Sakura-Fubuki]] (Grab)
-
+### Vision Stuff
 (Terra3, Cloud2)
 
 ==Rain: WoL, Lasswell: Tronn, Fina: Leah==

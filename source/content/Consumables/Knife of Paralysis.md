@@ -1,0 +1,1 @@
+Deals physical damage to a single enemy and inflicts Paralysis. Power increases when thrown

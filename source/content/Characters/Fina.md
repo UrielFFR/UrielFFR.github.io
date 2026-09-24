@@ -31,5 +31,5 @@
 - Strength 75
 - Stamina 93
 - Magic 69
-- Spirit 90
+- Spirit 87
 - Speed 66

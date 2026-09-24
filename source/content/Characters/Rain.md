@@ -22,9 +22,8 @@
 - Spirit 28 (+3C)
 - Speed 7
 ### Level 15
-- Strength 95
+- Strength 92
 - Stamina 119
 - Magic 43
 - Spirit 75
 - Speed 57
-Note either strength or spirit is +3 here, I can't remember which

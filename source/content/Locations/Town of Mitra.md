@@ -9,6 +9,8 @@
 	- [[Ether]]
 5. Dock
 	- [[Phoenix Down]]
+6. Bedside
+	- 200gil
 ## Shops
 ### Weapons
 1. [[Bronze Sword]] (350)

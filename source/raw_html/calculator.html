@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Battle Calculator">
+        <title>UFFR | Calculator</title>
+    </head>
+    <body>
+        <h1>Uriel's Simple Battle Calculator</h1>
+        <div>
+            Note: Damage variance seems to be about 5% higher or lower than the nominal value reported by the calculator
+        </div>
+        <div>
+            <h2>Extras</h2>
+            <form id="extras">
+                <input type="checkbox" id="Crit" name="crit">
+                <label for="Crit">Crit?</label>
+                <input type="checkbox" id="Staggered" name="staggered">
+                <label for="Staggered">Staggered?</label>
+                <input type="checkbox" id="MagBoost" name="magboost">
+                <label for="MagBoost">Magic Boost?</label>
+                <input type="checkbox" id="Swap" name="swap">
+                <label for="Swap">Swap Attacker and Defender?</label>
+            </form>
+        </div>
+        <div>
+            <h2>Difficulty</h2>
+            <form id="difficulty">
+                <input type="radio" id="Casual" name="difficulty" value="Casual">
+                <label for="Casual">Casual</label>
+                <input type="radio" id="Normal" name="difficulty" value="Normal">
+                <label for="Normal">Normal</label>
+                <input type="radio" id="Expert" name="difficulty" value="Expert" checked>
+                <label for="Expert">Expert</label>
+            </form>
+        </div>
+        <div>
+            <h2>Equipped Vision</h2>
+            <form id="vision">
+                <input type="radio" id="None" name="vision" value="None" checked>
+                <label for="None">None</label>
+                <input type="radio" id="Tronn" name="vision" value="Tronn">
+                <label for="Tronn">Tronn</label>
+                <input type="radio" id="Leah" name="vision" value="Leah">
+                <label for="Leah">Leah</label>
+                <input type="radio" id="WoL" name="vision" value="Warrior of Light">
+                <label for="WoL">Warrior of Light</label>
+                <input type="radio" id="Terra" name="vision" value="Terra">
+                <label for="Terra">Terra</label>
+                <input type="radio" id="Cloud" name="vision" value="Cloud">
+                <label for="Cloud">Cloud</label>
+            </form>
+        </div>
+        <div>
+            <h2>Attacker</h2>
+            <div>HP: <span id="atk_hp"></span></div>
+            <div>Stagger/MP: <span id="atk_mp"></span></div>
+            <div>
+                <span>Name:</span>
+                <select id="attacker_name">
+                    <option value="">-- Choose an option --</option>
+                </select>
+                <span>Level:</span>
+                <input id="attacker_lvl" type="number" value="1"/>
+                <br/>
+                <span>Weapon:</span>
+                <select id="attacker_weapon_1">
+                    <option value="">-- Choose an option --</option>
+                </select>
+                <span>Armor:</span>
+                <select id="attacker_armor_1">
+                    <option value="">-- Choose an option --</option>
+                </select>
+                <br/>
+                <span>Weapon:</span>
+                <select id="attacker_weapon_2">
+                    <option value="">-- Choose an option --</option>
+                </select>
+                <span>Armor:</span>
+                <select id="attacker_armor_2">
+                    <option value="">-- Choose an option --</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <h2>Defender</h2>
+            <div>HP: <span id="def_hp"></span></div>
+            <div>Stagger/MP: <span id="def_mp"></span></div>
+            <div>
+                <span>Name:</span>
+                <select id="defender_name">
+                    <option value="">-- Choose an option --</option>
+                </select>
+                <span>Level:</span>
+                <input id="defender_lvl" type="number" value="1"/>
+                <br/>
+                <span>Weapon:</span>
+                <select id="defender_weapon_1">
+                    <option value="">-- Choose an option --</option>
+                </select>
+                <span>Armor:</span>
+                <select id="defender_armor_1">
+                    <option value="">-- Choose an option --</option>
+                </select>
+                <br/>
+                <span>Weapon:</span>
+                <select id="defender_weapon_2">
+                    <option value="">-- Choose an option --</option>
+                </select>
+                <span>Armor:</span>
+                <select id="defender_armor_2">
+                    <option value="">-- Choose an option --</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <h2>Moves</h2>
+            <select id="move_list">
+                <option value="">-- Choose an option --</option>
+            </select>
+        </div>
+        <div>
+            <h2>Loadout 1</h2>
+            Damage: <span id="damage1"></span><br/>
+            Stagger: <span id="stagger1"></span><br/>
+            N: <span id="n1"></span>
+            <h2>Loadout 2</h2>
+            Damage: <span id="damage2"></span><br/>
+            Stagger: <span id="stagger2"></span><br/>
+            N: <span id="n2"></span>
+        </div>
+    </body>
+    <script>
+    let Crit = null;
+    let Difficulty = null;
+    let Vision = null;
+    let Attacker = null;
+    let Defender = null;
+    let TheMove = null;
+    let MagBoost = null;
+    let Staggered = null;
+
+    let AttackerWeapon1 = null;
+    let AttackerArmor1 = null;
+    let DefenderWeapon1 = null;
+    let DefenderArmor1 = null;
+    let AttackerWeapon2 = null;
+    let AttackerArmor2 = null;
+    let DefenderWeapon2 = null;
+    let DefenderArmor2 = null;
+
+    const product = (...arrays) => {
+      return arrays.reduce((accumulator, currentArray) => {
+        return accumulator.flatMap(accElement =>
+          currentArray.map(currElement => [...accElement, currElement])
+        );
+      }, [[]]);
+    };
+
+    const VisionCharacters = Object.freeze({
+      NONE: 0,
+      TRONN: 1,
+      LEAH: 2,
+      WoL: 3,
+      TERRA: 4,
+      CLOUD: 5,
+    });
+
+    const DamageType = Object.freeze({
+      PHYSICAL: 0,
+      MAGIC: 1,
+      LIGHT: 2,
+    });
+
+    const Difficulties = Object.freeze({
+      CASUAL: 0,
+      NORMAL: 1,
+      EXPERT: 2,
+    });
+
+    const Elemental = Object.freeze({
+      NON_ELEMENTAL: 0,
+      FIRE: 1,
+      ICE: 2,
+      THUNDER: 3,
+      WATER: 4,
+      EARTH: 5,
+      WIND: 6,
+      WHITE: 7,
+      BLACK: 8,
+      LIGHT: 9,
+    });
+
+    const EntityType = Object.freeze({
+      PLAYER: 0,
+      ENEMY: 1,
+      VISION: 2,
+    });
+
+    class Move {
+      constructor(element, damage_type, cost, power, hits, accuracy, stagger) {
+        this.element = element;
+        this.damage_type = damage_type;
+        this.cost = cost;
+        this.power = power;
+        this.hits = hits;
+        this.accuracy = accuracy;
+        this.stagger = stagger;
+      }
+    }
+
+    class Weapon {
+      constructor(phys_atk, mag_atk, sanctity) {
+        this.phys_atk = phys_atk;
+        this.mag_atk = mag_atk;
+        this.sanctity = sanctity;
+        if (this.phys_atk == null) {
+          this.phys_atk = 0;
+        }
+        if (this.mag_atk == null) {
+          this.mag_atk = 0;
+        }
+        if (this.sanctity == null) {
+          this.sanctity = 0;
+        }
+      }
+    }
+
+    class Armor {
+      constructor(phys_def, mag_def, sanctity) {
+        this.phys_def = phys_def;
+        this.mag_def = mag_def;
+        this.sanctity = sanctity;
+        if (this.phys_def == null) {
+          this.phys_def = 0;
+        }
+        if (this.mag_def == null) {
+          this.mag_def = 0;
+        }
+        if (this.sanctity == null) {
+          this.sanctity = 0;
+        }
+      }
+    }
+
+    class EntityStats {
+      constructor(lvl, etype, hp, mp, strength, stamina, magic, spirit, speed) {
+        this.lvl = lvl;
+        this.entity_type = etype;
+        this.hp = hp;
+        this.mp = mp;
+        this.strength = strength;
+        this.stamina = stamina;
+        this.magic = magic;
+        this.spirit = spirit;
+        this.speed = speed;
+        this.is_staggered = false;
+      }
+      effective_hp() {
+        return this.hp;
+      }
+      effective_stagger() {
+        return this.mp;
+      }
+      effective_attack(move) {
+        if (move.damage_type == DamageType.PHYSICAL) {
+          return this.strength;
+        } else if (move.damage_type == DamageType.MAGIC) {
+          return this.magic;
+        } else if (move.damage_type == DamageType.LIGHT) {
+          return this.spirit;
+        }
+      }
+      effective_defense(move) {
+        if (move.damage_type == DamageType.PHYSICAL) {
+          return this.stamina;
+        } else if (move.damage_type == DamageType.MAGIC) {
+          return this.spirit;
+        } else if (move.damage_type == DamageType.LIGHT) {
+          return this.spirit;
+        }
+      }
+    }
+
+    class Player extends EntityStats {
+      constructor(lvlm, lvlM, lvl, etype, hp, mp, strength, stamina, magic, spirit, speed) {
+        super(lvl, etype, hp, mp, strength, stamina, magic, spirit, speed);
+        this.lvl_min = lvlm;
+        this.lvl_max = lvlM;
+        this.progression = false;
+        this.weapon = null;
+        this.armor = null;
+        this.accessory_1 = null;
+        this.accessory_2 = null;
+        this.vision = null;
+        this.elemental_weaknesses = [];
+        this.elemental_resistances = [];
+        this.elemental_immunities = [];
+      }
+      effective_mp() {
+        if (Vision == VisionCharacters.TRONN) {
+          return self.mp * 1.1;
+        }
+        return self.mp;
+      }
+      give_weapon(weapon) {
+        this.weapon = weapon;
+        return this;
+      }
+      give_armor(armor) {
+        this.armor = armor;
+        return this;
+      }
+      progression_estimation(hp, mp, strength, stamina, magic, spirit, speed) {
+        let lvlm = this.lvl_min;
+        let lvlM = this.lvl_max;
+        this.progression = true;
+        this.hp_p = (hp - this.hp) / (lvlM - lvlm);
+        this.mp_p = (mp - this.mp) / (lvlM - lvlm);
+        this.strength_p = (strength - this.strength) / (lvlM - lvlm);
+        this.stamina_p = (stamina - this.stamina) / (lvlM - lvlm);
+        this.magic_p = (magic - this.magic) / (lvlM - lvlm);
+        this.spirit_p = (spirit - this.spirit) / (lvlM - lvlm);
+        this.speed_p = (speed - this.speed) / (lvlM - lvlm);
+      }
+      estimate_stats(lvl) {
+        if (!this.progression) {
+          return this;
+        }
+        if (lvl == null) {
+          return this;
+        }
+        return new Player(
+          this.lvl_min,
+          this.lvl_max,
+          lvl,
+          this.entity_type,
+          this.hp + Math.floor(this.hp_p * (lvl - this.lvl_min)),
+          this.mp + Math.floor(this.mp_p * (lvl - this.lvl_min)),
+          this.strength + Math.floor(this.strength_p * (lvl - this.lvl_min)),
+          this.stamina + Math.floor(this.stamina_p * (lvl - this.lvl_min)),
+          this.magic + Math.floor(this.magic_p * (lvl - this.lvl_min)),
+          this.spirit + Math.floor(this.spirit_p * (lvl - this.lvl_min)),
+          this.speed + Math.floor(this.speed_p * (lvl - this.lvl_min)),
+        );
+      }
+      effective_attack(move) {
+        let base = super.effective_attack(move);
+        let addtl = 0;
+        if (this.weapon != null) {
+          if (move.damage_type == DamageType.PHYSICAL) {
+            addtl += this.weapon.phys_atk;
+          } else if (move.damage_type == DamageType.MAGIC) {
+            addtl += this.weapon.mag_atk;
+          } else if (move.damage_type == DamageType.LIGHT) {
+            addtl += this.weapon.sanctity;
+          }
+        }
+        if ((this.armor != null) && (move.damage_type == DamageType.LIGHT)) {
+          addtl += this.armor.sanctity;
+        }
+        return base + addtl;
+      }
+      effective_defense(move) {
+        let base = super.effective_defense(move);
+        let addtl = 0;
+        if (this.armor != null) {
+          if (move.damage_type == DamageType.PHYSICAL) {
+            addtl += this.armor.phys_def;
+          } else if (move.damage_type == DamageType.MAGIC) {
+            addtl += this.armor.mag_def;
+          } else if (move.damage_type == DamageType.LIGHT) {
+            addtl += this.armor.sanctity;
+          }
+        }
+        if ((this.weapon != null) && (move.damage_type == DamageType.LIGHT)) {
+          addtl += this.weapon.sanctity;
+        }
+        return base + addtl;
+      }
+    }
+
+    // Stagger bar replaces MP
+    class Enemy extends EntityStats {
+      constructor(lvl, etype, hp, stagger, strength, stamina, magic, spirit, speed) {
+        super(lvl, etype, hp, stagger, strength, stamina, magic, spirit, speed);
+        this.elemental_weaknesses = [];
+        this.elemental_resistances = [];
+        this.elemental_immunities = [];
+      }
+      estimate_stats() {
+        return this;
+      }
+      effective_hp() {
+        let hp = super.effective_hp(Difficulty);
+        if (Difficulty == Difficulties.CASUAL) {
+          hp *= 0.6;
+        } else if (Difficulty == Difficulties.EXPERT) {
+          hp *= 1.6;
+        }
+        return hp;
+      }
+      effective_stagger() {
+        let stagger = super.effective_stagger();
+        if (Difficulty == Difficulties.CASUAL) {
+          stagger *= 0.4;
+        } else if (Difficulty == Difficulties.EXPERT) {
+          stagger *= 1.6;
+        }
+        return stagger;
+      }
+    }
+
+    let pRain = new Player(
+      1,
+      15,
+      1,
+      EntityType.PLAYER,
+      200,
+      35,
+      35,
+      25,
+      16,
+      28,
+      7,
+    );
+    pRain.progression_estimation(984, 113, 92, 119, 43, 75, 57);
+
+    let pLasswell = new Player(
+      1,
+      15,
+      1,
+      EntityType.PLAYER,
+      170,
+      40,
+      28,
+      25,
+      20,
+      28,
+      11,
+    );
+    pLasswell.progression_estimation(842, 132, 88, 88, 60, 70, 89);
+
+    let pFina = new Player(
+      6,
+      15,
+      6,
+      EntityType.PLAYER,
+      355,
+      93,
+      44,
+      50,
+      35,
+      54,
+      29,
+    );
+    pFina.progression_estimation(706, 164, 75, 93, 69, 87, 66);
+
+    // CASUAL: enemy HP 0.6x, stagger gauge 0.4x, agility 0.8x, damage taken 0.6x, and party damage dealt 1.1x.
+    // Normal uses a 1.0x multiplier for every listed setting.
+    // Expert: enemy HP 1.6x, stagger gauge 1.6x, agility 1.4x, damage taken 1.4x, and party damage dealt 0.8x.
+    // Expert: MRP 1.5x
+    let eSiren = new Enemy(
+      11,
+      EntityType.ENEMY,
+      20_000,
+      550,
+      165,
+      70,
+      165,
+      70,
+      50
+    );
+    eSiren.elemental_weaknesses.push(Elemental.THUNDER);
+    eSiren.elemental_resistances.push(Elemental.WATER);
+    let eHungerP1 = new Enemy(
+      9,
+      EntityType.ENEMY,
+      2_500,
+      450,
+      130,
+      60,
+      100,
+      60,
+      60
+    );
+    eHungerP1.elemental_weaknesses.push(Elemental.ICE);
+    let eHungerP2 = new Enemy(
+      10,
+      EntityType.ENEMY,
+      7_000,
+      450,
+      175,
+      60,
+      130,
+      60,
+      44
+    );
+    eHungerP2.elemental_weaknesses.push(Elemental.LIGHT);
+    let eHellsRider = new Enemy(
+      6,
+      EntityType.ENEMY,
+      4_000,
+      200,
+      105,
+      50,
+      65,
+      50,
+      39
+    );
+    eHellsRider.elemental_weaknesses.push(Elemental.ICE);
+    eHellsRider.elemental_weaknesses.push(Elemental.LIGHT);
+    let ePoisonFlora = new Enemy(
+      7,
+      EntityType.ENEMY,
+      1_200,
+      180,
+      88,
+      50,
+      20,
+      50,
+      32
+    );
+    ePoisonFlora.elemental_weaknesses.push(Elemental.FIRE);
+    ePoisonFlora.elemental_weaknesses.push(Elemental.WIND);
+    let eBelmodar = new Enemy(
+      4,
+      EntityType.ENEMY,
+      2_000,
+      145,
+      54,
+      30,
+      15,
+      28,
+      17
+    );
+    eBelmodar.elemental_weaknesses.push(Elemental.FIRE);
+
+    function stagger_calculation(attacker, defender, move) {
+      if (defender.elemental_immunities.includes(move.element)) {
+        return 0;
+      }
+      let B = move.stagger;
+      if ([VisionCharacters.TRONN, VisionCharacters.WoL].includes(Vision) && (attacker.entity_type == EntityType.PLAYER)) {
+        B *= 1.3;
+      }
+      let gap = attacker.lvl - defender.lvl;
+      let Lgap = 1;
+      if (gap > 0) {
+        Lgap = 1 + 0.1 * Math.pow(gap, 0.6);
+      } else if (gap < 0) {
+        Lgap = Math.max(0.1, 1 - 0.1 * Math.pow(-gap, 0.6));
+      }
+      let modifier = 1.0 / move.hits;
+      if (defender.elemental_resistances.includes(move.element)) {
+        modifier /= 2.0;
+      } else if (defender.elemental_weaknesses.includes(move.element)) {
+        modifier *= 3;
+      }
+      if (move.allMagicScaling == true) {
+        modifier *= 0.4;
+      }
+      if (Crit) {
+        modifier *= 1.5;
+      }
+      // power * (1 + attacker power modifiers + target power modifiers) + flat_power_additions
+      return Math.floor(Math.trunc(B * Lgap * modifier + 0.5) * move.hits);
+    }
+
+    function damage_calculation(attacker, defender, move) {
+      if (defender.elemental_immunities.includes(move.element)) {
+        return 0;
+      }
+      let r = attacker.effective_attack(move) / Math.max(defender.effective_defense(move), 1);
+      function F(r) {
+        if (r < 0.5) {
+          return 0.5 * r;
+        } else if (r < 1) {
+          return r * r;
+        } else {
+          return 8. / (1. + Math.exp(1 - r)) - 3;
+        }
+      }
+      let modifier = 1.0;
+      if (defender.elemental_resistances.includes(move.element)) {
+        modifier /= 2.0;
+      } else if (defender.elemental_weaknesses.includes(move.element)) {
+        modifier *= 1.5;
+      }
+      if (Staggered == true) {
+        modifier *= 1.5;
+      }
+      if (move.allMagicScaling == true) {
+        modifier *= 0.4;
+      }
+      if (Difficulty == Difficulties.CASUAL) {
+        if (attacker.entity_type == EntityType.PLAYER) {
+          modifier *= 1.1;
+        } else {
+          modifier *= 0.6;
+        }
+      } else if (Difficulty == Difficulties.EXPERT) {
+        if (attacker.entity_type == EntityType.PLAYER) {
+          modifier *= 0.8;
+        } else {
+          modifier *= 1.4;
+        }
+      }
+      // If WoL is the vision and it is a physical attack, 20% reduction
+      if ((Vision == VisionCharacters.WoL) && (move.damage_type == DamageType.PHYSICAL) && (attacker.entity_type == EntityType.ENEMY)) {
+        modifier *= 0.8;
+      }
+      if (MagBoost && ([DamageType.MAGIC,DamageType.LIGHT].includes(move.damage_type))) {
+        modifier *= 2;
+      }
+      if ((Vision == VisionCharacters.TERRA) && ([DamageType.MAGIC, DamageType.LIGHT].includes(move.damage_type)) && (attacker.entity_type == EntityType.PLAYER)) {
+        modifier *= 1.3;
+      }
+      if (Crit) {
+        modifier *= 1.5;
+      }
+      let power = move.power;
+      // power * (1 + attacker power modifiers + target power modifiers) + flat_power_additions
+      return Math.floor(0.6 * F(r) * (attacker.lvl + 2) * power * modifier);
+    }
+    // CASUAL: enemy HP 0.6x, stagger gauge 0.4x, agility 0.8x, damage taken 0.6x, and party damage dealt 1.1x.
+    // Normal uses a 1.0x multiplier for every listed setting.
+    // Expert: enemy HP 1.6x, stagger gauge 1.6x, agility 1.4x, damage taken 1.4x, and party damage dealt 0.8x.
+
+    let Weapons = [
+      ["Crimson Saber", new Weapon(21, 9)],
+      ["Bronze Sword", new Weapon(28, 13)],
+      ["Longsword", new Weapon(32, 15)],
+      ["Claymore", new Weapon(39, 18)],
+      ["Flamberge", new Weapon(41, 19)],
+      ["Shiden", new Weapon(16, 12)],
+      ["Nodachi", new Weapon(21, 20)],
+      ["Dodanuki", new Weapon(28, 21)],
+      ["Uchigatana", new Weapon(24, 17)],
+      ["Kogarasumaru", new Weapon(34, 25)],
+      ["Iwakirimaru", new Weapon(37, 27)],
+      ["Sakura-Fubuki", new Weapon(43, 22)],
+      ["Reincarnation", new Weapon(26, 21)],
+      ["Floral Arc", new Weapon(22, 18, 32)],
+      ["Crescent Bow", new Weapon(33, 27, 20)],
+    ];
+    function weapon(weapon_str) {
+      let weapon = Weapons.filter((w) => (w[0] == weapon_str)).flatMap((x) => (x[1]));
+      return weapon.length == 1 ? weapon[0] : null;
+    }
+
+    let Armory = [
+      ["Leather Armor", new Armor(5, 3)],
+      ["Tunic", new Armor(16, 18)],
+      ["Bronze Chestplate", new Armor(24, 22)],
+      ["Black Garb", new Armor(26, 23)],
+      ["Prickly Straitjacket", new Armor(29, 15)],
+      ["Knight's Jacket", new Armor(31, 28)],
+      ["Cotton Robe", new Armor(32, 46)],
+      ["Spirit Veil", new Armor(32, 46, 13)],
+      ["Surcoat", new Armor(42, 36)],
+    ];
+    function armor(armor_str) {
+      let armor = Armory.filter((w) => (w[0] == armor_str)).flatMap((x) => (x[1]));
+      return armor.length == 1 ? armor[0] : null;
+    }
+
+    let Moves = [
+      // Siren-skills
+      ["Ruin", new Move(Elemental.NON_ELEMENTAL, DamageType.MAGIC, 0, 12, 2, 100, 25)],
+      ["Bash", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 12, 1, 100, 25)],
+      ["Aero", new Move(Elemental.WIND, DamageType.MAGIC, 5, 14, 1, 100, 17)],
+      ["Flash Flood", new Move(Elemental.WATER, DamageType.PHYSICAL, 0, 18, 1, 100, 25)],
+      ["El Nino", new Move(Elemental.WATER, DamageType.MAGIC, 0, 18, 1, 100, 12)], // x0.4 if at least two char standing
+      ["Silence", new Move(Elemental.BLACK, DamageType.MAGIC, 5, 0, 1, 100, 0)],
+      ["Allure", new Move(Elemental.BLACK, DamageType.MAGIC, 0, 0, 1, 100, 0)],
+      ["Slap", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 24, 2, 100, 25)],
+
+      // Hunger P1
+      ["Rake", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 12, 1, 100, 25)],
+      ["Slam", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 12, 1, 100, 25)],
+      ["Crush", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 18, 1, 100, 25)],
+
+      // Hunger P2
+      ["Stone", new Move(Elemental.EARTH, DamageType.MAGIC, 5, 14, 1, 100, 17)],
+      ["Bioblaster", new Move(Elemental.EARTH, DamageType.MAGIC, 0, 12, 1, 100, 12)],
+
+      // Hell's Rider
+      ["Hack", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 12, 1, 100, 25)],
+      ["Bite", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 12, 1, 100, 25)],
+      ["Silver Lance", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 36, 1, 100, 25)],
+      ["Trample", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 18, 1, 100, 25)],
+
+      // Poison Flora
+      ["Poison Needle", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 12, 1, 100, 25)],
+      ["Leech", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 12, 1, 100, 25)],
+
+      // Belmodar
+      ["Thwack", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 12, 4, 100, 12)],
+
+      // Siren + Terra Skills
+      ["Water", new Move(Elemental.WATER, DamageType.MAGIC, 5, 14, 1, 100, 17)],
+
+      // Vision Skills
+      ["Vanguard Glaive", new Move(Elemental.LIGHT, DamageType.PHYSICAL, 7, 14, 5, 100, 17)],
+      ["Cure", new Move(Elemental.WHITE, DamageType.MAGIC, 6, 200, 1, 100, 50)],
+      ["Thunder Blade", new Move(Elemental.THUNDER, DamageType.PHYSICAL, 5, 17, 1, 100, 17)],
+      ["Stone Blade", new Move(Elemental.EARTH, DamageType.PHYSICAL, 5, 17, 1, 100, 17)],
+      ["Banish", new Move(Elemental.LIGHT, DamageType.MAGIC, 5, 17, 1, 100, 17)],
+      ["Fire", new Move(Elemental.FIRE, DamageType.MAGIC, 5, 17, 1, 100, 17)],
+      ["Blizzard", new Move(Elemental.FIRE, DamageType.MAGIC, 5, 17, 1, 100, 17)],
+      ["Thunder", new Move(Elemental.THUNDER, DamageType.MAGIC, 5, 17, 1, 100, 17)],
+      ["Attack", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 5, 12, 1, 50, 25)],
+      ["Deathblow", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 5, 12, 1, 100, 25)], // x1.5 always crits
+      ["Thunder Surge", new Move(Elemental.THUNDER, DamageType.PHYSICAL, 5, 12, 1, 100, 25)],
+      ["Water Surge", new Move(Elemental.WATER, DamageType.PHYSICAL, 5, 12, 1, 100, 25)],
+      // Vision Resonance
+      ["Hibernal Fury", new Move(Elemental.ICE, DamageType.MAGIC, 0, 45, 5, 500, 0)],
+      ["Ascension", new Move(Elemental.THUNDER, DamageType.PHYSICAL, 0, 36, 10, 500, 0)],
+      ["Crystal Braver", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 30, 5, 500, 0)],
+      ["Riot Blade - Lotus", new Move(Elemental.NON_ELEMENTAL, DamageType.MAGIC, 0, 30, 7, 500, 0)],
+      // Rain
+      ["Infinity Drive", new Move(Elemental.FIRE, DamageType.PHYSICAL, 0, 22, 1, 500, 25)], // x1.5 if staggered
+      ["Tackle", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 5, 14, 1, 100, 35)],
+      ["Flame Sword", new Move(Elemental.FIRE, DamageType.PHYSICAL, 15, 35, 1, 100, 33)],
+      // Lasswell
+      ["Null Moon", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 0, 22, 1, 500, 27)],
+      ["Dawn Frost", new Move(Elemental.ICE, DamageType.PHYSICAL, 5, 14, 1, 100, 30)],
+      ["Tranquility", new Move(Elemental.NON_ELEMENTAL, DamageType.PHYSICAL, 13, 19, 1, 100, 40)],
+      ["Ice Splitter", new Move(Elemental.ICE, DamageType.PHYSICAL, 17, 33, 3, 100, 25)],
+      // Fina
+      ["Holy Ray", new Move(Elemental.LIGHT, DamageType.LIGHT, 0, 22, 5, 500, 25)],
+      ["Shining Arrow", new Move(Elemental.LIGHT, DamageType.LIGHT, 5, 17, 1, 100, 25)],
+    ];
+    function move(move_str) {
+      let move = Moves.filter((w) => (w[0] == move_str)).flatMap((x) => (x[1]));
+      return move.length == 1 ? move[0] : null;
+    }
+
+    //let weapon_choices = [];
+    //let armor_choices = [];
+    //let choices = [];
+    //
+    //// Defense calculations
+    //weapon_choices = ["Crimson Saber", "Longsword", "Flamberge"];
+    //armor_choices = ["Leather Armor", "Tunic", "Knight's Jacket", "Surcoat"];
+    //choices = product(weapon_choices, armor_choices);
+    //for (let choice_idx in choices) {
+    //  let choice = choices[choice_idx];
+    //  console.log(choice);
+    //  let tempRain = pRain.estimate_stats(10).give_weapon(weapon(choice[0])).give_armor(armor(choice[1]));
+    //  console.log(damage_calculation(tempRain, eSiren, move("Thunder Blade"), Difficulties.EXPERT));
+    //  console.log(damage_calculation(eSiren, tempRain, move("Slap"), Difficulties.EXPERT));
+    //  console.log(damage_calculation(eSiren, tempRain, move("El Nino"), Difficulties.EXPERT));
+    //}
+    //
+    //weapon_choices = ["Shiden", "Nodachi", "Uchigatana", "Iwakirimaru", "Sakura-Fubuki"];
+    //armor_choices = ["Leather Armor", "Tunic", "Knight's Jacket", "Surcoat"];
+    //choices = product(weapon_choices, armor_choices);
+    //for (let choice_idx in choices) {
+    //  let choice = choices[choice_idx];
+    //  console.log(choice);
+    //  let tempRain = pRain.estimate_stats(10).give_weapon(weapon(choice[0])).give_armor(armor(choice[1]));
+    //  console.log(damage_calculation(tempRain, eSiren, move("Thunder Blade"), Difficulties.EXPERT));
+    //  console.log(damage_calculation(eSiren, tempRain, move("Slap"), Difficulties.EXPERT));
+    //  console.log(damage_calculation(eSiren, tempRain, move("El Nino"), Difficulties.EXPERT));
+    //}
+
+    let Entities = [
+      ["Rain", pRain],
+      ["Lasswell", pLasswell],
+      ["Fina", pFina],
+      ["Siren", eSiren],
+      ["Hunger P1", eHungerP1],
+      ["Hunger P2", eHungerP2],
+      ["Poison Flora", ePoisonFlora],
+      ["Hell's Rider", eHellsRider],
+      ["Belmodar", eBelmodar],
+    ];
+
+    // Elements
+    const n1Label = document.getElementById("n1");
+    const n2Label = document.getElementById("n2");
+    const damage1Label = document.getElementById("damage1");
+    const stagger1Label = document.getElementById("stagger1");
+    const damage2Label = document.getElementById("damage2");
+    const stagger2Label = document.getElementById("stagger2");
+    const movelistDropdown = document.getElementById("move_list");
+    const attackerDropdown = document.getElementById("attacker_name");
+    const attackerLvl = document.getElementById("attacker_lvl");
+    const attackerWeapon1Dropdown = document.getElementById("attacker_weapon_1");
+    const attackerArmor1Dropdown = document.getElementById("attacker_armor_1");
+    const attackerWeapon2Dropdown = document.getElementById("attacker_weapon_2");
+    const attackerArmor2Dropdown = document.getElementById("attacker_armor_2");
+    const defenderDropdown = document.getElementById("defender_name");
+    const defenderLvl = document.getElementById("defender_lvl");
+    const defenderWeapon1Dropdown = document.getElementById("defender_weapon_1");
+    const defenderArmor1Dropdown = document.getElementById("defender_armor_1");
+    const defenderWeapon2Dropdown = document.getElementById("defender_weapon_2");
+    const defenderArmor2Dropdown = document.getElementById("defender_armor_2");
+    const difficulty_form = document.getElementById("difficulty");
+    const vision_form = document.getElementById("vision");
+    const magboost_chk = document.getElementById("MagBoost");
+    const staggered_chk = document.getElementById("Staggered");
+    const crit_chk = document.getElementById("Crit");
+    const swap_chk = document.getElementById("Swap");
+    const atk_hp = document.getElementById("atk_hp");
+    const atk_mp = document.getElementById("atk_mp");
+    const def_hp = document.getElementById("def_hp");
+    const def_mp = document.getElementById("def_mp");
+
+    // Populate dropdowns
+    Moves.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      movelistDropdown.appendChild(option);
+    });
+    Entities.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      attackerDropdown.appendChild(option);
+    });
+    Entities.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      defenderDropdown.appendChild(option);
+    });
+    Weapons.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      attackerWeapon1Dropdown.appendChild(option);
+    });
+    Weapons.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      defenderWeapon1Dropdown.appendChild(option);
+    });
+    Armory.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      attackerArmor1Dropdown.appendChild(option);
+    });
+    Armory.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      defenderArmor1Dropdown.appendChild(option);
+    });
+    Weapons.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      attackerWeapon2Dropdown.appendChild(option);
+    });
+    Weapons.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      defenderWeapon2Dropdown.appendChild(option);
+    });
+    Armory.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      attackerArmor2Dropdown.appendChild(option);
+    });
+    Armory.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item[0];
+      option.textContent = item[0];
+
+      defenderArmor2Dropdown.appendChild(option);
+    });
+
+    function update() {
+      let TheAttacker1 = Attacker;
+      let TheDefender1 = Defender;
+      let TheAttacker2 = Attacker;
+      let TheDefender2 = Defender;
+      if (Attacker.entity_type == EntityType.PLAYER) {
+        TheAttacker1 = Attacker.estimate_stats(parseInt(attackerLvl.value)).give_weapon(AttackerWeapon1).give_armor(AttackerArmor1);
+        TheAttacker2 = Attacker.estimate_stats(parseInt(attackerLvl.value)).give_weapon(AttackerWeapon2).give_armor(AttackerArmor2);
+      }
+      if (Defender.entity_type == EntityType.PLAYER) {
+        TheDefender1 = Defender.estimate_stats(parseInt(defenderLvl.value)).give_weapon(DefenderWeapon1).give_armor(DefenderArmor1);
+        TheDefender2 = Defender.estimate_stats(parseInt(defenderLvl.value)).give_weapon(DefenderWeapon2).give_armor(DefenderArmor2);
+      }
+      let n1 = 0;
+      let n2 = 0;
+      let damage1 = 0;
+      let stagger1 = 0;
+      let damage2 = 0;
+      let stagger2 = 0;
+      if (swap_chk.checked) {
+        damage1 = damage_calculation(TheDefender1, TheAttacker1, TheMove);
+        stagger1 = stagger_calculation(TheDefender1, TheAttacker1, TheMove);
+        damage2 = damage_calculation(TheDefender2, TheAttacker2, TheMove);
+        stagger2 = stagger_calculation(TheDefender2, TheAttacker2, TheMove);
+        n1 = TheAttacker1.effective_hp() / damage1;
+        n2 = TheAttacker2.effective_hp() / damage2;
+      } else {
+        damage1 = damage_calculation(TheAttacker1, TheDefender1, TheMove);
+        stagger1 = stagger_calculation(TheAttacker1, TheDefender1, TheMove);
+        damage2 = damage_calculation(TheAttacker2, TheDefender2, TheMove);
+        stagger2 = stagger_calculation(TheAttacker2, TheDefender2, TheMove);
+        n1 = TheDefender1.effective_hp() / damage1;
+        n2 = TheDefender2.effective_hp() / damage2;
+      }
+      damage1Label.innerText = damage1;
+      stagger1Label.innerText = stagger1;
+      damage2Label.innerText = damage2;
+      stagger2Label.innerText = stagger2;
+      atk_hp.innerText = TheAttacker1.effective_hp();
+      atk_mp.innerText = TheAttacker1.effective_stagger();
+      def_hp.innerText = TheDefender1.effective_hp();
+      def_mp.innerText = TheDefender1.effective_stagger();
+      n1Label.innerText = n1;
+      n2Label.innerText = n2;
+    }
+
+    attackerLvl.addEventListener("input", (evt) => {
+      let lvl = parseInt(attackerLvl.value);
+      if ((lvl < 1) || lvl > 15) {
+        if (lvl > 15) {
+          lvl = 15;
+        } else {
+          lvl = 1;
+        }
+        attackerLvl.value = lvl;
+      }
+      update();
+    });
+    defenderLvl.addEventListener("input", (evt) => {
+      let lvl = parseInt(defenderLvl.value);
+      if ((lvl < 1) || lvl > 15) {
+        if (lvl > 15) {
+          lvl = 15;
+        } else {
+          lvl = 1;
+        }
+        defenderLvl.value = lvl;
+      }
+      update();
+    });
+    attackerDropdown.addEventListener("input", (evt) => {
+      let selection = Entities.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        Attacker = selection[0][1];
+      } else {
+        Attacker = null;
+      }
+      update();
+    });
+    defenderDropdown.addEventListener("input", (evt) => {
+      let selection = Entities.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        Defender = selection[0][1];
+      } else {
+        Defender = null;
+      }
+      update();
+    });
+    attackerWeapon1Dropdown.addEventListener("input", (evt) => {
+      let selection = Weapons.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        AttackerWeapon1 = selection[0][1];
+      } else {
+        AttackerWeapon1 = null;
+      }
+      update();
+    });
+    attackerArmor1Dropdown.addEventListener("input", (evt) => {
+      let selection = Armory.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        AttackerArmor1 = selection[0][1];
+      } else {
+        AttackerArmor1 = null;
+      }
+      update();
+    });
+    defenderWeapon1Dropdown.addEventListener("input", (evt) => {
+      let selection = Weapons.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        DefenderWeapon1 = selection[0][1];
+      } else {
+        DefenderWeapon1 = null;
+      }
+      update();
+    });
+    defenderArmor1Dropdown.addEventListener("input", (evt) => {
+      let selection = Armory.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        DefenderArmor1 = selection[0][1];
+      } else {
+        DefenderArmor1 = null;
+      }
+      update();
+    });
+    attackerWeapon2Dropdown.addEventListener("input", (evt) => {
+      let selection = Weapons.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        AttackerWeapon2 = selection[0][1];
+      } else {
+        AttackerWeapon2 = null;
+      }
+      update();
+    });
+    attackerArmor2Dropdown.addEventListener("input", (evt) => {
+      let selection = Armory.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        AttackerArmor2 = selection[0][1];
+      } else {
+        AttackerArmor2 = null;
+      }
+      update();
+    });
+    defenderWeapon2Dropdown.addEventListener("input", (evt) => {
+      let selection = Weapons.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        DefenderWeapon2 = selection[0][1];
+      } else {
+        DefenderWeapon2 = null;
+      }
+      update();
+    });
+    defenderArmor2Dropdown.addEventListener("input", (evt) => {
+      let selection = Armory.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        DefenderArmor2 = selection[0][1];
+      } else {
+        DefenderArmor2 = null;
+      }
+      update();
+    });
+
+    movelistDropdown.addEventListener("input", (evt) => {
+      let selection = Moves.filter(e => (e[0] == evt.target.value));
+      if (selection.length == 1) {
+        TheMove = selection[0][1];
+      } else {
+        selection = null;
+      }
+      update();
+    });
+
+    swap_chk.addEventListener("input", (evt) => {
+      update();
+    });
+
+    magboost_chk.addEventListener("input", (evt) => {
+      MagBoost = magboost_chk.checked;
+      update();
+    });
+
+    staggered_chk.addEventListener("input", (evt) => {
+      Staggered = staggered_chk.checked;
+      update();
+    });
+
+    crit_chk.addEventListener("input", (evt) => {
+      Crit = crit_chk.checked;
+      update();
+    });
+
+    difficulty_form.addEventListener("input", (evt) => {
+      let checked = Array.from(document.getElementsByName("difficulty")).filter(e => e.checked);
+      if (checked.length == 1) {
+        checked = checked[0];
+        if (checked.value == "Casual") {
+          Difficulty = Difficulties.CASUAL;
+        } else if (checked.value == "Normal") {
+          Difficulty = Difficulties.NORMAL;
+        } else if (checked.value == "Expert") {
+          Difficulty = Difficulties.EXPERT;
+        }
+      }
+      update();
+    });
+
+    vision_form.addEventListener("input", (evt) => {
+      let checked = Array.from(document.getElementsByName("vision")).filter(e => e.checked);
+      if (checked.length == 1) {
+        checked = checked[0];
+        if (checked.value == "None") {
+          Vision = VisionCharacters.NONE;
+        } else if (checked.value == "Tronn") {
+          Vision = VisionCharacters.TRONN;
+        } else if (checked.value == "Leah") {
+          Vision = VisionCharacters.LEAH;
+        } else if (checked.value == "Warrior of Light") {
+          Vision = VisionCharacters.WoL;
+        } else if (checked.value == "Terra") {
+          Vision = VisionCharacters.TERRA;
+        } else if (checked.value == "Cloud") {
+          Vision = VisionCharacters.CLOUD;
+        }
+      }
+      update();
+    });
+
+    Difficulty = Difficulties.EXPERT;
+    Vision = VisionCharacters.NONE;
+    Crit = false;
+    MagBoost = false;
+    Staggered = false;
+    </script>
+</HTML>
